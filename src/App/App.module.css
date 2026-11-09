@@ -1,0 +1,12 @@
+.app {
+  display: grid;
+  place-content: center;
+  gap: 24px;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 2rem;
+}
