@@ -1,3 +1,59 @@
+:root {
+  color-scheme: dark;
+
+  --font-body: "Manrope", system-ui, sans-serif;
+  --font-display: "Unbounded", "Manrope", system-ui, sans-serif;
+
+  --color-bg: #0c0b11;
+  --color-surface: #16151e;
+  --color-surface-hover: #1c1b26;
+  --color-border: rgb(255 255 255 / 0.08);
+  --color-border-strong: rgb(255 255 255 / 0.16);
+  --color-text: #f4f2ee;
+  --color-text-muted: #9c99a9;
+  --color-accent: #ff7a59;
+  --color-accent-soft: rgb(255 122 89 / 0.14);
+  --color-accent-border: rgb(255 122 89 / 0.5);
+  --color-accent-contrast: #1d0c06;
+  --color-skeleton: rgb(255 255 255 / 0.06);
+  --color-skeleton-highlight: rgb(255 255 255 / 0.06);
+  --glow: rgb(255 122 89 / 0.16);
+
+  --shadow-card:
+    inset 0 1px 0 rgb(255 255 255 / 0.04), 0 24px 48px -28px rgb(0 0 0 / 0.8);
+
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  --duration: 180ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+
+    --color-bg: #f7f4ef;
+    --color-surface: #ffffff;
+    --color-surface-hover: #fffdfa;
+    --color-border: rgb(24 20 36 / 0.09);
+    --color-border-strong: rgb(24 20 36 / 0.18);
+    --color-text: #17141f;
+    --color-text-muted: #6d6979;
+    --color-accent: #e5532f;
+    --color-accent-soft: rgb(229 83 47 / 0.1);
+    --color-accent-border: rgb(229 83 47 / 0.45);
+    --color-accent-contrast: #ffffff;
+    --color-skeleton: rgb(24 20 36 / 0.06);
+    --color-skeleton-highlight: rgb(255 255 255 / 0.7);
+    --glow: rgb(229 83 47 / 0.12);
+
+    --shadow-card:
+      0 1px 2px rgb(24 20 36 / 0.04), 0 24px 48px -32px rgb(24 20 36 / 0.25);
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -5,8 +61,36 @@
 }
 
 body {
+  min-height: 100vh;
   margin: 0;
-  font-family: system-ui, sans-serif;
+  background:
+    radial-gradient(70% 45% at 50% -5%, var(--glow), transparent 70%) fixed,
+    var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
   line-height: 1.5;
-  color-scheme: light dark;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  color: inherit;
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* biome-ignore-start lint/complexity/noImportantStyles: must override module styles */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+  /* biome-ignore-end lint/complexity/noImportantStyles: must override module styles */
 }

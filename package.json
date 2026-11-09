@@ -10,10 +10,12 @@
     "typecheck": "tsc -b",
     "lint": "biome lint",
     "format": "biome format --write",
-    "check": "biome check",
-    "check:fix": "biome check --write"
+    "check": "biome check && npm run check:placement",
+    "check:fix": "biome check --write && npm run check:placement",
+    "check:placement": "node scripts/check-placement.mjs"
   },
   "dependencies": {
+    "debounce": "^3.0.0",
     "mobx": "^7.1.5",
     "mobx-react-lite": "^5.1.2",
     "react": "^19.3.1",
