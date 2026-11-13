@@ -6,7 +6,8 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignoreUnknown": true
+    "ignoreUnknown": true,
+    "includes": ["**", "!!.claude/skills"]
   },
   "formatter": {
     "enabled": true,
@@ -25,6 +26,17 @@
     "rules": {
       "preset": "recommended",
       "style": {
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "patterns": [
+              {
+                "group": ["../**"],
+                "message": "Импорт вверх по дереву — через алиас `~/` (ARCHITECTURE.md, «Правила импорта»)."
+              }
+            ]
+          }
+        },
         "noExcessiveLinesPerFile": {
           "level": "error",
           "options": {

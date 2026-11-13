@@ -1,6 +1,6 @@
 import { use } from "react";
 
-import { ShowsStoreContext } from "../../ShowsStoreContext";
+import { ShowsStoreContext } from "~/App/ShowsStoreContext";
 
 export function usePresenter() {
   const store = use(ShowsStoreContext);

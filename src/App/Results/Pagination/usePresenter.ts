@@ -1,8 +1,6 @@
 import { use } from "react";
 
-import { ShowsStoreContext } from "../../ShowsStoreContext";
-
-import styles from "./Pagination.module.css";
+import { ShowsStoreContext } from "~/App/ShowsStoreContext";
 
 export function usePresenter() {
   const store = use(ShowsStoreContext);
@@ -10,14 +8,10 @@ export function usePresenter() {
 
   const pages = Array.from({ length: pageCount }, (_, index) => {
     const number = index + 1;
-    const isCurrent = number === page;
 
     return {
       number,
-      isCurrent,
-      className: isCurrent
-        ? `${styles.button} ${styles.current}`
-        : styles.button,
+      isCurrent: number === page,
       onSelect: () => goToPage(number),
     };
   });

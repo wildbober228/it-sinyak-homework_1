@@ -1,7 +1,8 @@
 import type { ChangeEvent, FormEvent, KeyboardEvent } from "react";
 import { use, useRef } from "react";
 
-import { ShowsStoreContext } from "../ShowsStoreContext";
+import { ShowsStoreContext } from "~/App/ShowsStoreContext";
+
 import { useDebouncedSearch } from "./useDebouncedSearch";
 
 export function usePresenter() {

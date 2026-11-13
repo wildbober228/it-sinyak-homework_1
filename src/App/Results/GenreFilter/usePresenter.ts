@@ -1,24 +1,17 @@
 import { use } from "react";
 
-import { ShowsStoreContext } from "../../ShowsStoreContext";
-
-import styles from "./GenreFilter.module.css";
+import { ShowsStoreContext } from "~/App/ShowsStoreContext";
 
 export function usePresenter() {
   const store = use(ShowsStoreContext);
 
-  const toChip = (genre: string | null, label: string, count: number) => {
-    const isActive = store.genre === genre;
-
-    return {
-      key: genre ?? "",
-      label,
-      count,
-      isActive,
-      className: isActive ? `${styles.chip} ${styles.active}` : styles.chip,
-      onSelect: () => store.selectGenre(genre),
-    };
-  };
+  const toChip = (genre: string | null, label: string, count: number) => ({
+    key: genre ?? "",
+    label,
+    count,
+    isActive: store.genre === genre,
+    onSelect: () => store.selectGenre(genre),
+  });
 
   return {
     hasGenres: store.genres.length > 0,

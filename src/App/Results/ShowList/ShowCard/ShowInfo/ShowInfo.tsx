@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 
-import type { Show } from "../../../../types";
+import type { Show } from "~/App/types";
 
 import styles from "./ShowInfo.module.css";
 

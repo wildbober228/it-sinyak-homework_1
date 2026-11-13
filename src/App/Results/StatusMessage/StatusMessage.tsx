@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 
-import { Button } from "../../../components/Button/Button";
+import { Button } from "~/components/Button/Button";
 
 import styles from "./StatusMessage.module.css";
 

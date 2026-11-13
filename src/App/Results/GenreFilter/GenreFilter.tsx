@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 
+import { GenreChip } from "./GenreChip/GenreChip";
 import { usePresenter } from "./usePresenter";
 
 import styles from "./GenreFilter.module.css";
@@ -11,16 +12,13 @@ export const GenreFilter = observer(function GenreFilter() {
     hasGenres && (
       <fieldset className={styles.filter} aria-label="Жанры">
         {chips.map((chip) => (
-          <button
+          <GenreChip
             key={chip.key}
-            className={chip.className}
-            type="button"
-            onClick={chip.onSelect}
-            aria-pressed={chip.isActive}
-          >
-            {chip.label}
-            <span className={styles.count}>{chip.count}</span>
-          </button>
+            label={chip.label}
+            count={chip.count}
+            isActive={chip.isActive}
+            onSelect={chip.onSelect}
+          />
         ))}
       </fieldset>
     )

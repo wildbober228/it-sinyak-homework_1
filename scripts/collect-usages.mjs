@@ -16,10 +16,17 @@ export function collectUsages(srcDir) {
     .filter((file) => /\.tsx?$/.test(file))
     .map((file) => join(srcDir, file));
 
-  const resolveImport = (importer, specifier) => {
-    if (!specifier.startsWith(".")) return undefined;
+  // `~/` — алиас `src/` (tsconfig.app.json → paths); пакеты пропускаем.
+  const resolveSpecifier = (importer, specifier) => {
+    if (specifier.startsWith("~/")) return join(srcDir, specifier.slice(2));
+    if (specifier.startsWith(".")) return resolve(dirname(importer), specifier);
+    return undefined;
+  };
 
-    const base = resolve(dirname(importer), specifier);
+  const resolveImport = (importer, specifier) => {
+    const base = resolveSpecifier(importer, specifier);
+    if (!base) return undefined;
+
     const index = join(base, "index.ts");
     const candidates = [base, `${base}.ts`, `${base}.tsx`, index];
 

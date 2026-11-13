@@ -1,5 +1,7 @@
 import { observer } from "mobx-react-lite";
 
+import { Button } from "~/components/Button/Button";
+
 import { usePresenter } from "./usePresenter";
 
 import styles from "./Pagination.module.css";
@@ -10,35 +12,36 @@ export const Pagination = observer(function Pagination() {
   return (
     isVisible && (
       <nav className={styles.pagination} aria-label="Страницы результатов">
-        <button
-          className={styles.button}
-          type="button"
+        <Button
+          variant="secondary"
+          shape="circle"
           onClick={goPrev}
           disabled={isFirst}
           aria-label="Предыдущая страница"
         >
           ←
-        </button>
+        </Button>
         {pages.map((page) => (
-          <button
+          <Button
             key={page.number}
-            className={page.className}
-            type="button"
+            variant="secondary"
+            shape="circle"
+            isActive={page.isCurrent}
             onClick={page.onSelect}
             aria-current={page.isCurrent && "page"}
           >
             {page.number}
-          </button>
+          </Button>
         ))}
-        <button
-          className={styles.button}
-          type="button"
+        <Button
+          variant="secondary"
+          shape="circle"
           onClick={goNext}
           disabled={isLast}
           aria-label="Следующая страница"
         >
           →
-        </button>
+        </Button>
       </nav>
     )
   );

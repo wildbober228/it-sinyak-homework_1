@@ -1,6 +1,7 @@
 import { use } from "react";
 
-import { ShowsStoreContext } from "../ShowsStoreContext";
+import { ShowsStoreContext } from "~/App/ShowsStoreContext";
+
 import { pluralize } from "./utils";
 
 export function usePresenter() {
