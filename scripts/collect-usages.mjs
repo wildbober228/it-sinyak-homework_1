@@ -1,9 +1,9 @@
-// Строит карту использования экспортов не-UI модулей:
-// модуль → экспорт → папки файлов, которые его импортируют.
 import { readdirSync, readFileSync } from "node:fs";
 import { basename, dirname, join, resolve } from "node:path";
 
-const NON_UI_MODULE = /^(\w+Store|\w+StoreContext|types|utils|constants)\.ts$/;
+import { isTask } from "./feature-layout.mjs";
+
+const NON_UI_MODULE = /^(\w+Store|api|types|utils|constants)\.ts$/;
 const EXPORT_DECLARATION =
   /^export\s+(?:async\s+)?(?:const|let|function|class|type|interface|enum)\s+([\w$]+)/gm;
 const NAMED_IMPORT =
@@ -16,7 +16,6 @@ export function collectUsages(srcDir) {
     .filter((file) => /\.tsx?$/.test(file))
     .map((file) => join(srcDir, file));
 
-  // `~/` — алиас `src/` (tsconfig.app.json → paths); пакеты пропускаем.
   const resolveSpecifier = (importer, specifier) => {
     if (specifier.startsWith("~/")) return join(srcDir, specifier.slice(2));
     if (specifier.startsWith(".")) return resolve(dirname(importer), specifier);
@@ -36,7 +35,7 @@ export function collectUsages(srcDir) {
   const usages = new Map();
 
   for (const file of files) {
-    if (!NON_UI_MODULE.test(basename(file))) continue;
+    if (!NON_UI_MODULE.test(basename(file)) && !isTask(file)) continue;
 
     const source = readFileSync(file, "utf8");
     const exports = new Map();

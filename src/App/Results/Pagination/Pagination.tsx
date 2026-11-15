@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 
 import { Button } from "~/components/Button/Button";
 
-import { usePresenter } from "./usePresenter";
+import { usePresenter } from "./logic/usePresenter";
 
 import styles from "./Pagination.module.css";
 
@@ -28,7 +28,7 @@ export const Pagination = observer(function Pagination() {
             shape="circle"
             isActive={page.isCurrent}
             onClick={page.onSelect}
-            aria-current={page.isCurrent && "page"}
+            aria-current={page.ariaCurrent}
           >
             {page.number}
           </Button>

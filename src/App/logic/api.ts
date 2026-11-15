@@ -1,5 +1,5 @@
-import { SEARCH_URL } from "./constants";
-import type { ApiSearchResult, ApiShow, Show } from "./types";
+import { SEARCH_URL } from "~/App/constants";
+import type { ApiSearchResult, ApiShow, Show } from "~/App/types";
 
 class HttpError extends Error {
   status: number;

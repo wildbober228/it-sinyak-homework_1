@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 
 import { GenreChip } from "./GenreChip/GenreChip";
-import { usePresenter } from "./usePresenter";
+import { usePresenter } from "./logic/usePresenter";
 
 import styles from "./GenreFilter.module.css";
 

@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 
-import type { ButtonProps } from "./usePresenter";
-import { usePresenter } from "./usePresenter";
+import type { ButtonProps } from "./logic/usePresenter";
+import { usePresenter } from "./logic/usePresenter";
 
 export const Button = observer(function Button(props: ButtonProps) {
   const { className, buttonProps } = usePresenter(props);

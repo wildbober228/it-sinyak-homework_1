@@ -29,8 +29,6 @@
   opacity: 0.35;
 }
 
-/* Размеры */
-
 .md {
   min-width: 44px;
   height: 44px;
@@ -46,13 +44,9 @@
   font-weight: 600;
 }
 
-/* Форма: идёт после размеров и перекрывает их отступы */
-
 .circle {
   padding: 0 8px;
 }
-
-/* Варианты: .active идёт после .secondary и перекрывает его */
 
 .secondary {
   border-color: var(--color-border);

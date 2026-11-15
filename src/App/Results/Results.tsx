@@ -1,11 +1,11 @@
 import { observer } from "mobx-react-lite";
 
 import { GenreFilter } from "./GenreFilter/GenreFilter";
+import { usePresenter } from "./logic/usePresenter";
 import { Pagination } from "./Pagination/Pagination";
 import { ShowList } from "./ShowList/ShowList";
 import { ShowsSkeleton } from "./ShowsSkeleton/ShowsSkeleton";
 import { StatusMessage } from "./StatusMessage/StatusMessage";
-import { usePresenter } from "./usePresenter";
 
 import styles from "./Results.module.css";
 

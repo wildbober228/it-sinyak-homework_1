@@ -1,15 +1,19 @@
-// Проверяет правило из ARCHITECTURE.md (раздел 2): каждый экспорт не-UI
-// модуля лежит в ближайшем общем предке всех мест, где он используется.
 import { basename, dirname, join, relative, resolve, sep } from "node:path";
 
 import { collectUsages } from "./collect-usages.mjs";
+import {
+  collectLayoutProblems,
+  featureOf,
+  layerOf,
+} from "./feature-layout.mjs";
 
 const ROOT = resolve(import.meta.dirname, "..");
+const SRC = join(ROOT, "src");
 
 const display = (path) => relative(ROOT, path).split(sep).join("/");
 
-function commonAncestor(dirs) {
-  const [first, ...rest] = [...dirs].map((dir) => dir.split(sep));
+function commonFeature(dirs) {
+  const [first, ...rest] = [...dirs].map((dir) => featureOf(dir).split(sep));
   let length = first.length;
 
   for (const parts of rest) {
@@ -20,7 +24,6 @@ function commonAncestor(dirs) {
 
   let ancestor = first.slice(0, length).join(sep);
 
-  // `components/` — не фича: общий код её детей принадлежит фиче-владельцу.
   while (basename(ancestor) === "components") ancestor = dirname(ancestor);
 
   return ancestor;
@@ -38,19 +41,21 @@ function findProblem(file, source, name, importerDirs) {
   }
 
   const moduleDir = dirname(file);
-  const target = commonAncestor(
+  const target = commonFeature(
     isUsedInside ? [...importerDirs, moduleDir] : importerDirs,
   );
 
-  return target === moduleDir
+  return target === featureOf(moduleDir)
     ? null
-    : `${where} — ближайший общий предок мест использования ${display(target)}/, перенеси туда`;
+    : `${where} — ближайшая общая фича мест использования ${display(target)}/, перенеси в ${display(join(target, layerOf(moduleDir)))}/`;
 }
 
-const problems = [];
+const problems = collectLayoutProblems(SRC).map(
+  ([file, problem]) => `${display(file)}: ${problem}`,
+);
 let checked = 0;
 
-for (const [file, { source, exports }] of collectUsages(join(ROOT, "src"))) {
+for (const [file, { source, exports }] of collectUsages(SRC)) {
   for (const [name, importerDirs] of exports) {
     const problem = findProblem(file, source, name, importerDirs);
 
@@ -62,9 +67,11 @@ for (const [file, { source, exports }] of collectUsages(join(ROOT, "src"))) {
 if (problems.length > 0) {
   console.error(problems.join("\n"));
   console.error(
-    `\nНарушений размещения: ${problems.length}. Правило — ARCHITECTURE.md, раздел 2.`,
+    `\nНарушений: ${problems.length}. Правила — ARCHITECTURE.md, разделы 1 и 2.`,
   );
   process.exit(1);
 }
 
-console.log(`Размещение экспортов: проверено ${checked}, нарушений нет.`);
+console.log(
+  `Раскладка и размещение экспортов: проверено ${checked}, нарушений нет.`,
+);

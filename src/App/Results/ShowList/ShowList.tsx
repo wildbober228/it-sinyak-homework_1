@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 
+import { usePresenter } from "./logic/usePresenter";
 import { ShowCard } from "./ShowCard/ShowCard";
-import { usePresenter } from "./usePresenter";
 
 import styles from "./ShowList.module.css";
 

@@ -1,31 +1,30 @@
 import type { ChangeEvent, FormEvent, KeyboardEvent } from "react";
-import { use, useRef } from "react";
+import { useRef } from "react";
 
-import { ShowsStoreContext } from "~/App/ShowsStoreContext";
+import { searchStore } from "~/App/logic/searchStore";
+import { searchShows } from "~/App/logic/tasks/searchShows";
 
+import { changeQuery } from "./tasks/changeQuery";
 import { useDebouncedSearch } from "./useDebouncedSearch";
 
 export function usePresenter() {
-  const store = use(ShowsStoreContext);
-  const debouncedSearch = useDebouncedSearch(store.search);
+  const debouncedSearch = useDebouncedSearch(searchShows);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const cancelSearch = () => {
-    debouncedSearch.clear();
-    store.reset();
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+  const updateQuery = (value: string) => {
     const query = value.trim();
 
-    store.setQuery(value);
+    changeQuery(value);
 
     if (query) {
       debouncedSearch(query);
     } else {
-      cancelSearch();
+      debouncedSearch.clear();
     }
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    updateQuery(event.target.value);
   };
 
   const handleSubmit = (event: FormEvent) => {
@@ -34,8 +33,7 @@ export function usePresenter() {
   };
 
   const handleClear = () => {
-    store.setQuery("");
-    cancelSearch();
+    updateQuery("");
     inputRef.current?.focus();
   };
 
@@ -45,9 +43,9 @@ export function usePresenter() {
 
   return {
     inputRef,
-    query: store.query,
-    hasQuery: store.query.length > 0,
-    isLoading: store.status === "loading",
+    query: searchStore.query,
+    hasQuery: searchStore.query.length > 0,
+    isLoading: searchStore.status === "loading",
     handleChange,
     handleSubmit,
     handleClear,

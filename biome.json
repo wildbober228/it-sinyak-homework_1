@@ -46,6 +46,48 @@
       }
     }
   },
+  "overrides": [
+    {
+      "includes": ["src/**/logic/tasks/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["../**"],
+                    "message": "Импорт вверх по дереву — через алиас `~/` (ARCHITECTURE.md, «Правила импорта»)."
+                  },
+                  {
+                    "group": [
+                      "react",
+                      "react/**",
+                      "react-dom",
+                      "react-dom/**",
+                      "mobx-react-lite"
+                    ],
+                    "message": "Таски не зависят от React (ARCHITECTURE.md, «Таски»)."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/index.css"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noImportantStyles": "off"
+          }
+        }
+      }
+    }
+  ],
   "assist": {
     "enabled": true,
     "actions": {

@@ -1,14 +1,11 @@
 import type { ComponentProps } from "react";
 
-import styles from "./Button.module.css";
+import styles from "~/components/Button/Button.module.css";
 
 export type ButtonProps = Omit<ComponentProps<"button">, "className"> & {
-  /** primary — залитая акцентом, secondary — контурная */
   variant?: "primary" | "secondary";
   size?: "md" | "sm";
-  /** circle — круг для коротких подписей: номер страницы, стрелка */
   shape?: "pill" | "circle";
-  /** Выбранное состояние: текущая страница, активный фильтр */
   isActive?: boolean;
 };
 

@@ -1,10 +1,9 @@
-import { use } from "react";
+import { searchStore } from "~/App/logic/searchStore";
 
-import { ShowsStoreContext } from "~/App/ShowsStoreContext";
+import { goToPage } from "./tasks/goToPage";
 
 export function usePresenter() {
-  const store = use(ShowsStoreContext);
-  const { page, pageCount, goToPage } = store;
+  const { page, pageCount } = searchStore;
 
   const pages = Array.from({ length: pageCount }, (_, index) => {
     const number = index + 1;
@@ -12,6 +11,7 @@ export function usePresenter() {
     return {
       number,
       isCurrent: number === page,
+      ariaCurrent: number === page ? ("page" as const) : undefined,
       onSelect: () => goToPage(number),
     };
   });

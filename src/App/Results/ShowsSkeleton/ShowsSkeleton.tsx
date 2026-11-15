@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 
-import { usePresenter } from "./usePresenter";
+import { usePresenter } from "./logic/usePresenter";
 
 import styles from "./ShowsSkeleton.module.css";
 
