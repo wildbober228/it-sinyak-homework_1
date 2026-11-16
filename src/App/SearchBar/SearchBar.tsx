@@ -10,6 +10,10 @@ export const SearchBar = observer(function SearchBar() {
     query,
     hasQuery,
     isLoading,
+    inputLabel,
+    placeholder,
+    loadingLabel,
+    clearLabel,
     handleChange,
     handleSubmit,
     handleClear,
@@ -30,8 +34,8 @@ export const SearchBar = observer(function SearchBar() {
           value={query}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          placeholder="..."
-          aria-label="Название сериала"
+          placeholder={placeholder}
+          aria-label={inputLabel}
           autoComplete="off"
           spellCheck={false}
           enterKeyHint="search"
@@ -41,7 +45,7 @@ export const SearchBar = observer(function SearchBar() {
             <span
               className={styles.spinner}
               role="status"
-              aria-label="Загрузка"
+              aria-label={loadingLabel}
             />
           )}
           {hasQuery && (
@@ -49,7 +53,7 @@ export const SearchBar = observer(function SearchBar() {
               className={styles.clear}
               type="button"
               onClick={handleClear}
-              aria-label="Очистить поиск"
+              aria-label={clearLabel}
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6 6l12 12M18 6 6 18" />

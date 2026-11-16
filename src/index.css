@@ -2,55 +2,48 @@
   color-scheme: dark;
 
   --font-body: "Manrope", system-ui, sans-serif;
-  --font-display: "Unbounded", "Manrope", system-ui, sans-serif;
+  --font-display: "Oswald", "Arial Narrow", sans-serif;
+  --font-neon: "Pacifico", cursive;
+  --font-osd: "Pixelify Sans", ui-monospace, monospace;
+  --font-hand: "Caveat", cursive;
 
-  --color-bg: #0c0b11;
-  --color-surface: #16151e;
-  --color-surface-hover: #1c1b26;
-  --color-border: rgb(255 255 255 / 0.08);
-  --color-border-strong: rgb(255 255 255 / 0.16);
-  --color-text: #f4f2ee;
-  --color-text-muted: #9c99a9;
-  --color-accent: #ff7a59;
-  --color-accent-soft: rgb(255 122 89 / 0.14);
-  --color-accent-border: rgb(255 122 89 / 0.5);
-  --color-accent-contrast: #1d0c06;
-  --color-skeleton: rgb(255 255 255 / 0.06);
-  --color-skeleton-highlight: rgb(255 255 255 / 0.06);
-  --glow: rgb(255 122 89 / 0.16);
+  --color-bg: #0e0a16;
+  --color-plastic: #17121e;
+  --color-plastic-edge: #3d3449;
+  --color-text: #f3edf7;
+  --color-text-muted: #a49cb3;
+  --color-neon-pink: #ff4fa8;
+  --color-neon-cyan: #3ef0ff;
+  --color-neon-amber: #ffc93c;
+  --color-wood: #6b4424;
+  --color-wood-dark: #3b2413;
+  --color-wood-light: #93653a;
+  --color-vcr-blue: #1f33d6;
+  --color-paper: #f4ecd6;
+  --color-ink: #23317a;
 
-  --shadow-card:
-    inset 0 1px 0 rgb(255 255 255 / 0.04), 0 24px 48px -28px rgb(0 0 0 / 0.8);
+  --glow-pink:
+    0 0 4px rgb(255 255 255 / 0.4), 0 0 12px var(--color-neon-pink),
+    0 0 32px rgb(255 79 168 / 0.6);
 
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-full: 999px;
+  --tape-height: 300px;
+  --spine-width: 50px;
+  --cover-width: 170px;
+  --tape-gap: 6px;
+
+  --radius-sm: 4px;
+  --radius-md: 10px;
 
   --duration: 180ms;
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-@media (prefers-color-scheme: light) {
+@media (max-width: 520px) {
   :root {
-    color-scheme: light;
-
-    --color-bg: #f7f4ef;
-    --color-surface: #ffffff;
-    --color-surface-hover: #fffdfa;
-    --color-border: rgb(24 20 36 / 0.09);
-    --color-border-strong: rgb(24 20 36 / 0.18);
-    --color-text: #17141f;
-    --color-text-muted: #6d6979;
-    --color-accent: #e5532f;
-    --color-accent-soft: rgb(229 83 47 / 0.1);
-    --color-accent-border: rgb(229 83 47 / 0.45);
-    --color-accent-contrast: #ffffff;
-    --color-skeleton: rgb(24 20 36 / 0.06);
-    --color-skeleton-highlight: rgb(255 255 255 / 0.7);
-    --glow: rgb(229 83 47 / 0.12);
-
-    --shadow-card:
-      0 1px 2px rgb(24 20 36 / 0.04), 0 24px 48px -32px rgb(24 20 36 / 0.25);
+    --tape-height: 250px;
+    --spine-width: 40px;
+    --cover-width: 140px;
+    --tape-gap: 5px;
   }
 }
 
@@ -64,12 +57,27 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(70% 45% at 50% -5%, var(--glow), transparent 70%) fixed,
+    radial-gradient(60% 40% at 50% -10%, rgb(255 79 168 / 0.2), transparent 70%)
+    fixed,
+    radial-gradient(50% 35% at 100% 100%, rgb(62 240 255 / 0.08), transparent)
+    fixed,
     var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: repeating-linear-gradient(
+    transparent 0 2px,
+    rgb(0 0 0 / 0.2) 2px 3px
+  );
+  pointer-events: none;
 }
 
 button,

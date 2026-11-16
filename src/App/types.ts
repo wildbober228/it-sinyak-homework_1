@@ -1,5 +1,10 @@
 export type SearchStatus = "idle" | "loading" | "success" | "error";
 
+export type SearchError = {
+  code: "rateLimit" | "server" | "network";
+  status: number | null;
+};
+
 export type Show = {
   id: number;
   name: string;

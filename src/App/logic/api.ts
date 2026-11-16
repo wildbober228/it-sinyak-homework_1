@@ -1,5 +1,5 @@
 import { SEARCH_URL } from "~/App/constants";
-import type { ApiSearchResult, ApiShow, Show } from "~/App/types";
+import type { ApiSearchResult, ApiShow, SearchError, Show } from "~/App/types";
 
 class HttpError extends Error {
   status: number;
@@ -26,16 +26,15 @@ export async function fetchShows(
   return results.map(({ show }) => toShow(show));
 }
 
-export function getErrorMessage(error: unknown) {
-  if (error instanceof HttpError && error.status === 429) {
-    return "Слишком много запросов. Подождите пару секунд и попробуйте снова.";
-  }
-
+export function toSearchError(error: unknown): SearchError {
   if (error instanceof HttpError) {
-    return `Сервер TVmaze ответил ошибкой ${error.status}.`;
+    return {
+      code: error.status === 429 ? "rateLimit" : "server",
+      status: error.status,
+    };
   }
 
-  return "Не удалось связаться с сервером. Проверьте подключение к интернету.";
+  return { code: "network", status: null };
 }
 
 function toShow(show: ApiShow): Show {

@@ -1,6 +1,8 @@
 import type { ChangeEvent, FormEvent, KeyboardEvent } from "react";
 import { useRef } from "react";
 
+import { useTranslation } from "react-i18next";
+
 import { searchStore } from "~/App/logic/searchStore";
 import { searchShows } from "~/App/logic/tasks/searchShows";
 
@@ -8,6 +10,7 @@ import { changeQuery } from "./tasks/changeQuery";
 import { useDebouncedSearch } from "./useDebouncedSearch";
 
 export function usePresenter() {
+  const { t } = useTranslation();
   const debouncedSearch = useDebouncedSearch(searchShows);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -46,6 +49,10 @@ export function usePresenter() {
     query: searchStore.query,
     hasQuery: searchStore.query.length > 0,
     isLoading: searchStore.status === "loading",
+    inputLabel: t("searchBar.label"),
+    placeholder: t("searchBar.placeholder"),
+    loadingLabel: t("searchBar.loading"),
+    clearLabel: t("searchBar.clear"),
     handleChange,
     handleSubmit,
     handleClear,

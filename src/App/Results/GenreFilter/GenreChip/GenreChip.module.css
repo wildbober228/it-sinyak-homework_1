@@ -1,4 +1,79 @@
+.plate {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border: 2px solid var(--color-plastic-edge);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(#251d2e, var(--color-plastic));
+  box-shadow: 0 8px 14px -8px rgb(0 0 0 / 0.85);
+  color: #d9cfe4;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transform-origin: 50% -16px;
+  transition:
+    border-color var(--duration) ease,
+    color var(--duration) ease,
+    box-shadow var(--duration) ease,
+    text-shadow var(--duration) ease;
+}
+
+.plate::before {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: calc(100% + 2px);
+  left: 12px;
+  height: 16px;
+  border-inline: 1px solid #6d6478;
+  pointer-events: none;
+}
+
+.plate:hover {
+  border-color: var(--color-neon-cyan);
+  color: #fff;
+  animation: swing 700ms ease;
+}
+
+.plate:focus-visible {
+  outline: 2px solid var(--color-neon-cyan);
+  outline-offset: 3px;
+}
+
+.plate[aria-pressed="true"] {
+  border-color: var(--color-neon-pink);
+  box-shadow:
+    0 0 12px rgb(255 79 168 / 0.55),
+    inset 0 0 10px rgb(255 79 168 / 0.35);
+  color: #fff;
+  text-shadow:
+    0 0 6px var(--color-neon-pink),
+    0 0 14px var(--color-neon-pink);
+}
+
 .count {
+  color: var(--color-neon-amber);
+  font-family: var(--font-osd);
   font-size: 0.75rem;
-  opacity: 0.6;
+  letter-spacing: 0;
+  text-shadow: none;
+}
+
+@keyframes swing {
+  25% {
+    transform: rotate(3deg);
+  }
+
+  55% {
+    transform: rotate(-2deg);
+  }
+
+  80% {
+    transform: rotate(1deg);
+  }
 }

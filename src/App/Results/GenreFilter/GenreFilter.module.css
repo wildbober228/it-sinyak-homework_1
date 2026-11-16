@@ -1,9 +1,12 @@
 .filter {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  justify-content: center;
+  gap: 16px 10px;
   min-width: 0;
   margin: 0;
-  padding: 0;
+  padding: 22px 8px 0;
   border: 0;
+  background:
+    linear-gradient(#77708a, #3b3546 60%, #1c1822) top / 100% 6px no-repeat;
 }

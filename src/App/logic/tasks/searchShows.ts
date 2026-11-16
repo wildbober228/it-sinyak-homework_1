@@ -1,4 +1,4 @@
-import { fetchShows, getErrorMessage } from "~/App/logic/api";
+import { fetchShows, toSearchError } from "~/App/logic/api";
 import { searchStore } from "~/App/logic/searchStore";
 
 import { selectGenre } from "./selectGenre";
@@ -18,7 +18,7 @@ export async function searchShows(query: string) {
   } catch (error) {
     if (signal.aborted) return { error: null };
 
-    searchStore.setError(getErrorMessage(error));
+    searchStore.setError(toSearchError(error));
 
     return { error };
   }

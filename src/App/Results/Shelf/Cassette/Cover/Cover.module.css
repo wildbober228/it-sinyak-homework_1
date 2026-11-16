@@ -1,0 +1,96 @@
+.cover {
+  position: relative;
+  display: flex;
+  flex: 0 0 var(--cover-width);
+  flex-direction: column;
+  height: 100%;
+  border-left: 2px solid rgb(0 0 0 / 0.45);
+  background: #0d0d10;
+  color: #fff;
+  font-family: var(--font-display);
+}
+
+.band {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 8px;
+  background: #050506;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.poster {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  object-fit: cover;
+}
+
+.noPoster {
+  display: grid;
+  flex: 1;
+  place-items: center;
+  background: var(--tone);
+  font-size: 3rem;
+}
+
+.caption {
+  display: -webkit-box;
+  padding: 6px 8px 8px;
+  overflow: hidden;
+  background: linear-gradient(#141217, #000);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.hit {
+  position: absolute;
+  top: 16px;
+  right: -4px;
+  display: grid;
+  place-items: center;
+  width: 78px;
+  aspect-ratio: 1;
+  padding: 14px;
+  background: #ffd23f;
+  color: #c8101e;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1.05;
+  text-align: center;
+  text-transform: uppercase;
+  clip-path: polygon(
+    50% 0,
+    61% 10%,
+    75% 7%,
+    79% 21%,
+    93% 25%,
+    90% 39%,
+    100% 50%,
+    90% 61%,
+    93% 75%,
+    79% 79%,
+    75% 93%,
+    61% 90%,
+    50% 100%,
+    39% 90%,
+    25% 93%,
+    21% 79%,
+    7% 75%,
+    10% 61%,
+    0 50%,
+    10% 39%,
+    7% 25%,
+    21% 21%,
+    25% 7%,
+    39% 10%
+  );
+  transform: rotate(14deg);
+}

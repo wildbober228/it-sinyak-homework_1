@@ -1,10 +1,11 @@
+import type { ComponentProps } from "react";
+
 import { observer } from "mobx-react-lite";
 
-import type { ButtonProps } from "./logic/usePresenter";
-import { usePresenter } from "./logic/usePresenter";
+import styles from "./Button.module.css";
+
+type ButtonProps = Omit<ComponentProps<"button">, "className">;
 
 export const Button = observer(function Button(props: ButtonProps) {
-  const { className, buttonProps } = usePresenter(props);
-
-  return <button type="button" {...buttonProps} className={className} />;
+  return <button type="button" {...props} className={styles.button} />;
 });

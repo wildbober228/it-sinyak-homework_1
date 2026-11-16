@@ -1,14 +1,14 @@
 import { makeAutoObservable } from "mobx";
 
 import { PAGE_SIZE } from "~/App/constants";
-import type { Genre, SearchStatus, Show } from "~/App/types";
+import type { Genre, SearchError, SearchStatus, Show } from "~/App/types";
 
 class SearchStore {
   query = "";
   searchedQuery = "";
   shows: Show[] = [];
   status: SearchStatus = "idle";
-  errorMessage = "";
+  error: SearchError | null = null;
   genre: string | null = null;
   page = 1;
 
@@ -76,9 +76,9 @@ class SearchStore {
     this.status = "success";
   }
 
-  setError(message: string) {
+  setError(error: SearchError) {
     this.status = "error";
-    this.errorMessage = message;
+    this.error = error;
   }
 
   reset() {
@@ -86,7 +86,7 @@ class SearchStore {
     this.searchedQuery = "";
     this.shows = [];
     this.status = "idle";
-    this.errorMessage = "";
+    this.error = null;
     this.genre = null;
     this.page = 1;
   }

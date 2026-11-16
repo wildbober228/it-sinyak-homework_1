@@ -1,0 +1,71 @@
+{
+  "language": {
+    "name": "English"
+  },
+  "languageSwitch": {
+    "label": "Language"
+  },
+  "app": {
+    "title": "Video Rental · What are we renting tonight?",
+    "eyebrow": "TV series on tape · TVmaze catalog",
+    "sign": "Video Rental",
+    "tagline": "What are we renting",
+    "taglineAccent": "tonight?"
+  },
+  "searchBar": {
+    "label": "Show title",
+    "placeholder": "Tape title…",
+    "loading": "Loading",
+    "clear": "Clear search"
+  },
+  "results": {
+    "label": "Search results",
+    "summary_one": "{{count}} tape on the shelves",
+    "summary_other": "{{count}} tapes on the shelves",
+    "genreSummary": "“{{genre}}” shelf: {{found}} of {{total}}"
+  },
+  "errors": {
+    "rateLimit": "Too many requests. Wait a couple of seconds and try again.",
+    "server": "The TVmaze server responded with error {{status}}.",
+    "network": "Couldn't reach the server. Check your internet connection."
+  },
+  "genreFilter": {
+    "label": "Genres",
+    "all": "All aisles"
+  },
+  "shelf": {
+    "label": "Tapes on the shelf",
+    "catalogNumber": "#{{number}}",
+    "spineHit": "Hit",
+    "coverHit": "Rental hit"
+  },
+  "rentalCard": {
+    "heading": "Rental card",
+    "year": "Year",
+    "network": "Network",
+    "genres": "Genre",
+    "rating": "Rating",
+    "ratingValue": "★ {{rating}}",
+    "noRating": "not rated",
+    "missing": "—",
+    "noSummary": "The synopsis got lost along with the box.",
+    "rent": "Rent it ↗"
+  },
+  "rewind": {
+    "status": "Rewinding"
+  },
+  "noSignal": {
+    "title": "No signal",
+    "retry": "Rewind"
+  },
+  "emptyShelf": {
+    "title": "All rented out, come back tomorrow!",
+    "text": "Meanwhile, try another title."
+  },
+  "pagination": {
+    "label": "Shelves",
+    "shelf": "Shelf",
+    "prev": "Previous shelf",
+    "next": "Next shelf"
+  }
+}

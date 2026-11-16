@@ -1,0 +1,73 @@
+{
+  "language": {
+    "name": "Русский"
+  },
+  "languageSwitch": {
+    "label": "Язык"
+  },
+  "app": {
+    "title": "Видеопрокат · Что возьмём на вечер?",
+    "eyebrow": "Сериалы на кассетах · каталог TVmaze",
+    "sign": "Видеопрокат",
+    "tagline": "Что возьмём",
+    "taglineAccent": "на вечер?"
+  },
+  "searchBar": {
+    "label": "Название сериала",
+    "placeholder": "Название кассеты…",
+    "loading": "Загрузка",
+    "clear": "Очистить поиск"
+  },
+  "results": {
+    "label": "Результаты поиска",
+    "summary_one": "На полках {{count}} кассета",
+    "summary_few": "На полках {{count}} кассеты",
+    "summary_many": "На полках {{count}} кассет",
+    "summary_other": "На полках {{count}} кассеты",
+    "genreSummary": "Полка «{{genre}}»: {{found}} из {{total}}"
+  },
+  "errors": {
+    "rateLimit": "Слишком много запросов. Подождите пару секунд и попробуйте снова.",
+    "server": "Сервер TVmaze ответил ошибкой {{status}}.",
+    "network": "Не удалось связаться с сервером. Проверьте подключение к интернету."
+  },
+  "genreFilter": {
+    "label": "Жанры",
+    "all": "Весь зал"
+  },
+  "shelf": {
+    "label": "Кассеты на полке",
+    "catalogNumber": "№{{number}}",
+    "spineHit": "Хит",
+    "coverHit": "Хит проката"
+  },
+  "rentalCard": {
+    "heading": "Карточка проката",
+    "year": "Год",
+    "network": "Канал",
+    "genres": "Жанр",
+    "rating": "Оценка",
+    "ratingValue": "★ {{rating}}",
+    "noRating": "без оценки",
+    "missing": "—",
+    "noSummary": "Аннотация потерялась вместе с коробкой.",
+    "rent": "Взять напрокат ↗"
+  },
+  "rewind": {
+    "status": "Перемотка"
+  },
+  "noSignal": {
+    "title": "No signal",
+    "retry": "Перемотать"
+  },
+  "emptyShelf": {
+    "title": "Всё разобрали, заходите завтра!",
+    "text": "А пока попробуйте другое название — каталог лучше ищет по-английски."
+  },
+  "pagination": {
+    "label": "Стеллажи",
+    "shelf": "Стеллаж",
+    "prev": "Предыдущий стеллаж",
+    "next": "Следующий стеллаж"
+  }
+}

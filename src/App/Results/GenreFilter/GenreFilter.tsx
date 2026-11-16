@@ -6,11 +6,11 @@ import { usePresenter } from "./logic/usePresenter";
 import styles from "./GenreFilter.module.css";
 
 export const GenreFilter = observer(function GenreFilter() {
-  const { hasGenres, chips } = usePresenter();
+  const { label, hasGenres, chips } = usePresenter();
 
   return (
     hasGenres && (
-      <fieldset className={styles.filter} aria-label="Жанры">
+      <fieldset className={styles.filter} aria-label={label}>
         {chips.map((chip) => (
           <GenreChip
             key={chip.key}

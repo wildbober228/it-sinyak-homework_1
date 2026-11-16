@@ -2,7 +2,7 @@
 
 Стек: React 19, MobX, TypeScript, Vite, CSS Modules, Biome.
 
-Эталонный пример фичи: [`src/App/SearchBar/`](src/App/SearchBar/).
+Эталонный пример фичи: [`src/App/SearchBar/`](src/App/SearchBar).
 
 ## Пример структуры
 
@@ -10,6 +10,13 @@
 src/
   main.tsx                  ← точка входа, вне дерева
   index.css                 ← глобальные стили (сброс, CSS-переменные)
+  constants.ts, types.ts    ← глобальные константы и типы (список языков)
+  i18next.d.ts              ← типы ключей переводов
+  locales/                  ← словари переводов
+    ru/
+      translation.json
+    en/
+      translation.json
   components/               ← глобальные переиспользуемые компоненты
     Button/
       Button.tsx
@@ -17,6 +24,7 @@ src/
       logic/
         usePresenter.ts
   logic/                    ← глобальные сторы и таски (нужны всему приложению)
+    i18n.ts                 ← настройка i18next
     tasks/
   App/                      ← корневая фича
     App.tsx
@@ -107,7 +115,10 @@ src/
 **Исключение:** если у компонента нет логики (он просто отрисовывает props),
 `usePresenter` не нужен — View использует props напрямую, тип пропсов
 объявляется в View. Пример:
-[`src/App/Results/StatusMessage/`](src/App/Results/StatusMessage/).
+[`src/App/Results/GenreFilter/GenreChip/`](src/App/Results/GenreFilter/GenreChip).
+Свой текст компонент получает из презентера (раздел «Тексты и переводы»),
+поэтому без презентера остаются только компоненты, которые отрисовывают
+props.
 
 ### Таски — `logic/tasks/`
 
@@ -264,3 +275,32 @@ View родителя после декомпозиции компонует д�
 | Стор         | `logic/chatStore.ts`: класс `ChatStore`, экземпляр `chatStore` |
 | Запросы      | `logic/api.ts`                                                 |
 | Не-UI модули | `types.ts`, `constants.ts` в корне; `logic/utils.ts`           |
+
+## 7. Тексты и переводы
+
+Тексты для пользователя — подписи, `aria-label`, `placeholder`, сообщения об
+ошибках — в коде не пишем, только в словарях i18next.
+
+- Словари лежат в `src/locales/<язык>/<namespace>.json`. `translation` —
+  тексты интерфейса, ключи сгруппированы по фичам: `searchBar.placeholder`,
+  `rentalCard.heading`. `genres` — переводы значений, пришедших из API.
+- i18next настраивается один раз в `src/logic/i18n.ts`, его импортирует
+  `main.tsx`. Типы ключей объявлены в `src/i18next.d.ts`, поэтому опечатка
+  в ключе — ошибка `npm run typecheck`.
+- `t` получает только презентер — через `useTranslation()` — и отдаёт View
+  готовые строки. View, таски, сторы и `api.ts` переводы не вызывают.
+- Сторы и таски хранят данные, не зависящие от языка: исходные значения API
+  (`Drama`) и коды (`{ code: "network" }`), а не готовые фразы. Переводит их
+  презентер.
+- Множественное число — суффиксами i18next (`summary_one`, `summary_few`,
+  `summary_many`, `summary_other`) и `t(key, { count })`, без ручного выбора
+  формы.
+- Не переводятся обозначения, одинаковые на любом языке: `VHS`,
+  `PAL · Hi-Fi`, `AV-1`.
+- Языки перечислены в `LANGUAGES` (`src/constants.ts`). У каждого языка
+  полный набор словарей с теми же ключами, кроме форм множественного числа:
+  они свои у каждого языка (`_one`, `_other` в английском; `_one`, `_few`,
+  `_many`, `_other` в русском). Типы ключей строятся по русским словарям.
+- Текущий язык хранится в URL (`?lang=en`). `src/logic/i18n.ts` читает его
+  при старте, а при каждой смене языка записывает обратно в URL, `<html lang>`
+  и заголовок вкладки. Язык меняют только через таску `changeLanguage`.

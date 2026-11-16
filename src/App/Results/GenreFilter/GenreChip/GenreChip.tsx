@@ -1,7 +1,5 @@
 import { observer } from "mobx-react-lite";
 
-import { Button } from "~/components/Button/Button";
-
 import styles from "./GenreChip.module.css";
 
 type GenreChipProps = {
@@ -13,15 +11,14 @@ type GenreChipProps = {
 
 export const GenreChip = observer(function GenreChip(props: GenreChipProps) {
   return (
-    <Button
-      variant="secondary"
-      size="sm"
-      isActive={props.isActive}
+    <button
+      className={styles.plate}
+      type="button"
       onClick={props.onSelect}
       aria-pressed={props.isActive}
     >
       {props.label}
       <span className={styles.count}>{props.count}</span>
-    </Button>
+    </button>
   );
 });

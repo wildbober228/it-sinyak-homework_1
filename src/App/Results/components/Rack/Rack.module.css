@@ -1,0 +1,37 @@
+.rack {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-width: 0;
+  min-height: calc(var(--tape-height) + 58px);
+  padding: 36px 16px 22px;
+  border: 10px solid var(--color-wood);
+  border-bottom-width: 0;
+  border-radius: 6px 6px 0 0;
+  background:
+    linear-gradient(rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.25)),
+    repeating-linear-gradient(
+      90deg,
+      var(--color-wood-dark) 0 3px,
+      #321e0f 3px 9px
+    );
+  box-shadow:
+    inset 0 20px 26px -14px rgb(0 0 0 / 0.85),
+    inset 10px 0 18px -12px rgb(0 0 0 / 0.8),
+    inset -10px 0 18px -12px rgb(0 0 0 / 0.8);
+}
+
+.rack::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  bottom: 0;
+  left: -10px;
+  height: 22px;
+  background: linear-gradient(
+    var(--color-wood-light),
+    var(--color-wood) 35%,
+    var(--color-wood-dark)
+  );
+  box-shadow: 0 10px 16px -6px rgb(0 0 0 / 0.75);
+}

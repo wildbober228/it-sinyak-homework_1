@@ -1,0 +1,92 @@
+.slot {
+  display: flex;
+  animation: arrive 460ms var(--ease-out) both;
+}
+
+.slot:nth-child(2) {
+  animation-delay: 60ms;
+}
+
+.slot:nth-child(3) {
+  animation-delay: 120ms;
+}
+
+.slot:nth-child(4) {
+  animation-delay: 180ms;
+}
+
+.cassette {
+  display: flex;
+  width: var(--spine-width);
+  height: var(--tape-height);
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 3px;
+  background: var(--tone);
+  box-shadow:
+    inset -2px 0 0 rgb(0 0 0 / 0.35),
+    0 4px 10px -4px rgb(0 0 0 / 0.8);
+  color: var(--tone-ink);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    width 420ms var(--ease-out),
+    transform 420ms var(--ease-out),
+    box-shadow 420ms var(--ease-out);
+}
+
+.cassette[aria-pressed="true"] {
+  width: calc(var(--spine-width) + var(--cover-width));
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.1),
+    0 24px 30px -14px rgb(0 0 0 / 0.95);
+  transform: translateY(-14px);
+}
+
+.cassette:focus-visible {
+  outline: 2px solid var(--color-neon-cyan);
+  outline-offset: 3px;
+}
+
+.toneBlack {
+  --tone: #18161c;
+  --tone-ink: #ffd23f;
+}
+
+.toneRed {
+  --tone: #b0202c;
+  --tone-ink: #fff4e0;
+}
+
+.toneBlue {
+  --tone: #1f3d96;
+  --tone-ink: #f2f4ff;
+}
+
+.toneYellow {
+  --tone: #f1c232;
+  --tone-ink: #1b1308;
+}
+
+.toneWhite {
+  --tone: #e9e3d3;
+  --tone-ink: #1d1a22;
+}
+
+.toneGreen {
+  --tone: #1d6a4b;
+  --tone-ink: #eafff4;
+}
+
+.tonePurple {
+  --tone: #55267f;
+  --tone-ink: #ffe8fb;
+}
+
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
