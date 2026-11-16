@@ -6,7 +6,8 @@ import { goToPage } from "./tasks/goToPage";
 
 export function usePresenter() {
   const { t } = useTranslation();
-  const { page, pageCount } = searchStore;
+  const { page, result } = searchStore;
+  const { pageCount } = result;
 
   const pages = Array.from({ length: pageCount }, (_, index) => {
     const number = index + 1;

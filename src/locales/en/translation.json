@@ -26,7 +26,7 @@
   },
   "errors": {
     "rateLimit": "Too many requests. Wait a couple of seconds and try again.",
-    "server": "The TVmaze server responded with error {{status}}.",
+    "server": "The rental server responded with error {{status}}.",
     "network": "Couldn't reach the server. Check your internet connection."
   },
   "genreFilter": {
@@ -52,7 +52,8 @@
     "rent": "Rent it ↗"
   },
   "rewind": {
-    "status": "Rewinding"
+    "status": "Rewinding",
+    "warmingUp": "Warming up"
   },
   "noSignal": {
     "title": "No signal",
@@ -67,5 +68,33 @@
     "shelf": "Shelf",
     "prev": "Previous shelf",
     "next": "Next shelf"
+  },
+  "favorites": {
+    "button_one": "Favorites: {{count}} tape",
+    "button_other": "Favorites: {{count}} tapes",
+    "buttonLoading": "Favorites are loading",
+    "pending": "…",
+    "title": "Saved for tonight",
+    "loading": "Pulling tapes off the shelf…",
+    "error": "Couldn't load your favorites.",
+    "empty": "Nothing here yet. Tap ☆ on a tape to save it.",
+    "add": "Add “{{title}}” to favorites",
+    "remove": "Remove “{{title}}” from favorites",
+    "restore": "Put “{{title}}” back into favorites"
+  },
+  "toast": {
+    "label": "Notifications",
+    "added": "“{{title}}” is in your favorites",
+    "removed": "“{{title}}” is no longer in your favorites",
+    "removedMany_one": "Removed {{count}} tape from favorites",
+    "removedMany_other": "Removed {{count}} tapes from favorites",
+    "failed": "Couldn't update favorites. Please try again."
+  },
+  "warmUp": {
+    "title": "Warming up the VCR",
+    "text": "The rental server is waking up — the first start takes up to a minute. You can type a title right away.",
+    "downTitle": "The VCR didn't turn on",
+    "downText": "The rental server didn't respond. Check your connection and try again.",
+    "retry": "Power on"
   }
 }

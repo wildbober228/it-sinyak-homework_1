@@ -1,5 +1,15 @@
-import { SEARCH_URL } from "~/App/constants";
-import type { ApiSearchResult, ApiShow, SearchError, Show } from "~/App/types";
+import {
+  API_URL,
+  CLIENT_ID_HEADER,
+  CLIENT_ID_STORAGE_KEY,
+  PING_RETRY_DELAY_MS,
+} from "~/App/constants";
+import type {
+  FavoritesList,
+  RequestError,
+  ShowsQuery,
+  ShowsResult,
+} from "~/App/types";
 
 class HttpError extends Error {
   status: number;
@@ -10,23 +20,55 @@ class HttpError extends Error {
   }
 }
 
-export async function fetchShows(
-  query: string,
+const clientId = readClientId();
+
+export function fetchShows(
+  { query, genre, page }: ShowsQuery,
   signal: AbortSignal,
-): Promise<Show[]> {
-  const url = `${SEARCH_URL}?q=${encodeURIComponent(query)}`;
-  const response = await fetch(url, { signal });
+) {
+  const params = new URLSearchParams({ q: query, page: String(page) });
 
-  if (!response.ok) {
-    throw new HttpError(response.status);
-  }
+  if (genre) params.set("genre", genre);
 
-  const results: ApiSearchResult[] = await response.json();
-
-  return results.map(({ show }) => toShow(show));
+  return request<ShowsResult>(`/api/shows?${params}`, { signal });
 }
 
-export function toSearchError(error: unknown): SearchError {
+export function favoritesRequest(path: string, method = "GET") {
+  return request<FavoritesList>(path, {
+    method,
+    headers: { [CLIENT_ID_HEADER]: clientId },
+  });
+}
+
+export function fetchFavorites() {
+  return favoritesRequest("/api/favorites");
+}
+
+export function deleteFavorites(ids: number[]) {
+  return favoritesRequest(`/api/favorites?ids=${ids.join(",")}`, "DELETE");
+}
+
+export function pingServer(signal?: AbortSignal) {
+  return request<unknown>("/api/health", { signal });
+}
+
+export async function waitForServer(timeout: number) {
+  const deadline = Date.now() + timeout;
+
+  for (;;) {
+    try {
+      const remaining = Math.max(deadline - Date.now(), 1);
+
+      return await pingServer(AbortSignal.timeout(remaining));
+    } catch (error) {
+      if (Date.now() + PING_RETRY_DELAY_MS >= deadline) throw error;
+
+      await new Promise((resolve) => setTimeout(resolve, PING_RETRY_DELAY_MS));
+    }
+  }
+}
+
+export function toRequestError(error: unknown): RequestError {
   if (error instanceof HttpError) {
     return {
       code: error.status === 429 ? "rateLimit" : "server",
@@ -37,22 +79,35 @@ export function toSearchError(error: unknown): SearchError {
   return { code: "network", status: null };
 }
 
-function toShow(show: ApiShow): Show {
-  return {
-    id: show.id,
-    name: show.name,
-    url: show.url,
-    image: show.image?.medium ?? null,
-    genres: show.genres,
-    year: show.premiered?.slice(0, 4) ?? null,
-    rating: show.rating.average?.toFixed(1) ?? null,
-    network: show.network?.name ?? show.webChannel?.name ?? null,
-    summary: stripHtml(show.summary ?? ""),
-  };
+async function request<T>(path: string, init: RequestInit): Promise<T> {
+  const response = await fetch(`${API_URL}${path}`, init);
+
+  if (!response.ok) {
+    throw new HttpError(response.status);
+  }
+
+  return response.json();
 }
 
-function stripHtml(html: string) {
-  const document = new DOMParser().parseFromString(html, "text/html");
+function readClientId() {
+  try {
+    const saved = localStorage.getItem(CLIENT_ID_STORAGE_KEY);
 
-  return document.body.textContent?.trim() ?? "";
+    if (saved) return saved;
+
+    const created = createClientId();
+    localStorage.setItem(CLIENT_ID_STORAGE_KEY, created);
+
+    return created;
+  } catch {
+    return createClientId();
+  }
+}
+
+function createClientId() {
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+
+  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join(
+    "",
+  );
 }

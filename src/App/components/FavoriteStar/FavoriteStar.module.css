@@ -1,0 +1,66 @@
+.star {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 2px solid var(--color-plastic-edge);
+  border-radius: 50%;
+  background: var(--color-plastic);
+  box-shadow: 0 6px 12px -6px rgb(0 0 0 / 0.9);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    color var(--duration) ease,
+    border-color var(--duration) ease,
+    box-shadow var(--duration) ease,
+    transform 80ms ease;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  fill: transparent;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transition: fill var(--duration) ease;
+}
+
+.star:hover:not(:disabled) {
+  border-color: var(--color-neon-amber);
+  color: var(--color-neon-amber);
+}
+
+.star:active:not(:disabled) {
+  transform: scale(0.88);
+}
+
+.star:focus-visible {
+  outline: 2px solid var(--color-neon-cyan);
+  outline-offset: 2px;
+}
+
+.star[aria-pressed="true"] {
+  border-color: var(--color-neon-amber);
+  box-shadow:
+    0 0 12px rgb(255 201 60 / 0.55),
+    0 6px 12px -6px rgb(0 0 0 / 0.9);
+  color: var(--color-neon-amber);
+}
+
+.star[aria-pressed="true"] .icon {
+  fill: currentColor;
+}
+
+.star:disabled {
+  cursor: progress;
+  animation: pulse 700ms ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  to {
+    opacity: 0.35;
+  }
+}

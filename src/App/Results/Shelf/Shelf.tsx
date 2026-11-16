@@ -9,10 +9,10 @@ import { RentalCard } from "./RentalCard/RentalCard";
 import styles from "./Shelf.module.css";
 
 export const Shelf = observer(function Shelf() {
-  const { label, cassettes, pulledOut } = usePresenter();
+  const { className, isUpdating, label, cassettes, pulledOut } = usePresenter();
 
   return (
-    <div className={styles.shelf}>
+    <div className={className} aria-busy={isUpdating}>
       <Rack>
         <ul className={styles.tapes} aria-label={label}>
           {cassettes.map((cassette) => (

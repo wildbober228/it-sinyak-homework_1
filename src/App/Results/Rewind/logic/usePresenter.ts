@@ -1,14 +1,21 @@
 import { useTranslation } from "react-i18next";
 
-import { PAGE_SIZE } from "~/App/constants";
+import { serverStore } from "~/App/logic/serverStore";
+import { PLACEHOLDER_COUNT } from "~/App/Results/Rewind/constants";
 
-const placeholders = Array.from({ length: PAGE_SIZE }, (_, index) => index);
+const placeholders = Array.from(
+  { length: PLACEHOLDER_COUNT },
+  (_, index) => index,
+);
 
 export function usePresenter() {
   const { t } = useTranslation();
 
   return {
-    status: t("rewind.status"),
+    status:
+      serverStore.status === "waking"
+        ? t("rewind.warmingUp")
+        : t("rewind.status"),
     placeholders,
   };
 }

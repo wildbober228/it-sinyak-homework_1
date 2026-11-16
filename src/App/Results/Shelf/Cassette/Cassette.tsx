@@ -1,5 +1,7 @@
 import { observer } from "mobx-react-lite";
 
+import { FavoriteStar } from "~/App/components/FavoriteStar/FavoriteStar";
+
 import { Cover } from "./Cover/Cover";
 import type { CassetteProps } from "./logic/usePresenter";
 import { usePresenter } from "./logic/usePresenter";
@@ -18,6 +20,7 @@ export const Cassette = observer(function Cassette(props: CassetteProps) {
     coverHitLabel,
     isPulledOut,
     pullOut,
+    favorite,
   } = usePresenter(props);
 
   return (
@@ -39,6 +42,14 @@ export const Cassette = observer(function Cassette(props: CassetteProps) {
         />
         <Cover title={title} image={image} hitLabel={coverHitLabel} />
       </button>
+      <span className={styles.sticker}>
+        <FavoriteStar
+          isActive={favorite.isActive}
+          isBusy={favorite.isBusy}
+          label={favorite.label}
+          onToggle={favorite.toggle}
+        />
+      </span>
     </li>
   );
 });

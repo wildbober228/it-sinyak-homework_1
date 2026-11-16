@@ -6,20 +6,20 @@ import { retrySearch } from "./tasks/retrySearch";
 
 export function usePresenter() {
   const { t } = useTranslation();
-  const { status, shows, filteredShows, genre, error } = searchStore;
-  const isSuccess = status === "success";
-  const total = shows.length;
+  const { status, genre, error, result } = searchStore;
+  const { total, found } = result;
+  const hasData = status === "success" || status === "updating";
 
   return {
     label: t("results.label"),
     isLoading: status === "loading",
     isError: status === "error",
-    isEmpty: isSuccess && total === 0,
-    hasResults: isSuccess && total > 0,
+    isEmpty: hasData && total === 0,
+    hasResults: hasData && total > 0,
     summary: genre
       ? t("results.genreSummary", {
           genre: t(genre, { ns: "genres" }),
-          found: filteredShows.length,
+          found,
           total,
         })
       : t("results.summary", { count: total }),

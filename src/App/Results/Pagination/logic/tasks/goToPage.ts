@@ -1,7 +1,10 @@
 import { searchStore } from "~/App/logic/searchStore";
+import { loadShows } from "~/App/logic/tasks/loadShows";
 
-export function goToPage(page: number) {
-  const { pageCount } = searchStore;
+export async function goToPage(page: number) {
+  if (page === searchStore.page) return { error: null };
 
-  searchStore.setPage(Math.min(Math.max(page, 1), pageCount));
+  searchStore.setPage(page);
+
+  return loadShows("updating");
 }

@@ -1,6 +1,20 @@
 .slot {
+  position: relative;
   display: flex;
   animation: arrive 460ms var(--ease-out) both;
+}
+
+.sticker {
+  position: absolute;
+  top: -15px;
+  left: calc(var(--spine-width) / 2);
+  z-index: 1;
+  transform: translateX(-50%);
+  transition: transform 420ms var(--ease-out);
+}
+
+.cassette[aria-pressed="true"] + .sticker {
+  transform: translate(-50%, -14px);
 }
 
 .slot:nth-child(2) {

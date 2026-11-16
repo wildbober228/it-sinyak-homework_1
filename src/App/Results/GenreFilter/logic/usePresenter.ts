@@ -1,11 +1,13 @@
 import { useTranslation } from "react-i18next";
 
 import { searchStore } from "~/App/logic/searchStore";
-import { selectGenre } from "~/App/logic/tasks/selectGenre";
+
+import { selectGenre } from "./tasks/selectGenre";
 
 export function usePresenter() {
   const { t, i18n } = useTranslation();
-  const { genre, genres, shows } = searchStore;
+  const { genre, result } = searchStore;
+  const { genres, total } = result;
 
   const toChip = (name: string | null, label: string, count: number) => ({
     key: name ?? "",
@@ -22,6 +24,6 @@ export function usePresenter() {
   return {
     label: t("genreFilter.label"),
     hasGenres: genres.length > 0,
-    chips: [toChip(null, t("genreFilter.all"), shows.length), ...genreChips],
+    chips: [toChip(null, t("genreFilter.all"), total), ...genreChips],
   };
 }

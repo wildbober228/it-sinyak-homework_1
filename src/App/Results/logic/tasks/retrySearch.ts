@@ -1,6 +1,5 @@
-import { searchStore } from "~/App/logic/searchStore";
-import { searchShows } from "~/App/logic/tasks/searchShows";
+import { loadShows } from "~/App/logic/tasks/loadShows";
 
 export function retrySearch() {
-  return searchShows(searchStore.searchedQuery);
+  return loadShows("loading");
 }

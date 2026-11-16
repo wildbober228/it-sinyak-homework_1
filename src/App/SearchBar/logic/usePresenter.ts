@@ -4,9 +4,9 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import { searchStore } from "~/App/logic/searchStore";
-import { searchShows } from "~/App/logic/tasks/searchShows";
 
 import { changeQuery } from "./tasks/changeQuery";
+import { searchShows } from "./tasks/searchShows";
 import { useDebouncedSearch } from "./useDebouncedSearch";
 
 export function usePresenter() {
@@ -48,7 +48,8 @@ export function usePresenter() {
     inputRef,
     query: searchStore.query,
     hasQuery: searchStore.query.length > 0,
-    isLoading: searchStore.status === "loading",
+    isLoading:
+      searchStore.status === "loading" || searchStore.status === "updating",
     inputLabel: t("searchBar.label"),
     placeholder: t("searchBar.placeholder"),
     loadingLabel: t("searchBar.loading"),

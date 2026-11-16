@@ -14,6 +14,14 @@ React 19 + MobX + TypeScript + Vite, стили — CSS Modules, линтер и
 После изменений `npm run check:fix` и `npm run typecheck` должны проходить
 без ошибок.
 
+## Бэкенд
+
+Go-сервер лежит в `../Backend`, у него свои `CLAUDE.md` и `ARCHITECTURE.md`.
+Локально фронт ходит на `http://localhost:8080` (`.env.development`), прод —
+на Render (`.env.production`). Запуск бэка — `make run` в `../Backend` или
+конфигурация `api` из `.claude/launch.json`. Изменил контракт API — после
+правок должны проходить и проверки фронта, и `make check` бэка.
+
 ## Навыки
 
 `.claude/skills/react-best-practices` — копия `skills/react-best-practices` из

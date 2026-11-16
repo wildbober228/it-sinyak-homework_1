@@ -1,9 +1,12 @@
 import { observer } from "mobx-react-lite";
 
+import { Favorites } from "./Favorites/Favorites";
 import { LanguageSwitch } from "./LanguageSwitch/LanguageSwitch";
 import { usePresenter } from "./logic/usePresenter";
 import { Results } from "./Results/Results";
 import { SearchBar } from "./SearchBar/SearchBar";
+import { Toaster } from "./Toaster/Toaster";
+import { WarmUp } from "./WarmUp/WarmUp";
 
 import styles from "./App.module.css";
 
@@ -13,6 +16,7 @@ export const App = observer(function App() {
   return (
     <main className={className}>
       <div className={styles.toolbar}>
+        <Favorites />
         <LanguageSwitch />
       </div>
       <header className={styles.header}>
@@ -22,8 +26,10 @@ export const App = observer(function App() {
           {tagline} <span className={styles.accent}>{taglineAccent}</span>
         </p>
       </header>
+      <WarmUp />
       <SearchBar />
       <Results />
+      <Toaster />
     </main>
   );
 });
