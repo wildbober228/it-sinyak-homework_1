@@ -78,6 +78,36 @@
       }
     },
     {
+      "includes": ["src/ui-kit/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": ["../**"],
+                    "message": "Импорт вверх по дереву — через алиас `~/` (ARCHITECTURE.md, «Правила импорта»)."
+                  },
+                  {
+                    "group": [
+                      "~/App",
+                      "~/App/**",
+                      "~/logic",
+                      "~/logic/**",
+                      "react-i18next"
+                    ],
+                    "message": "ui-kit не знает о предметной области, тексты получает через props (ARCHITECTURE.md, «Дерево»)."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "includes": ["src/index.css"],
       "linter": {
         "rules": {

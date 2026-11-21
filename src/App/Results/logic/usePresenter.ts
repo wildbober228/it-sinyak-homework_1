@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import { searchStore } from "~/App/logic/searchStore";
-
-import { retrySearch } from "./tasks/retrySearch";
+import { loadShows } from "~/App/logic/tasks/loadShows";
 
 export function usePresenter() {
   const { t } = useTranslation();
@@ -26,6 +25,6 @@ export function usePresenter() {
     errorMessage: error
       ? t(`errors.${error.code}`, { status: error.status })
       : "",
-    retry: retrySearch,
+    retry: () => loadShows("loading"),
   };
 }

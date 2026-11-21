@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 
-import { Button } from "~/components/Button/Button";
+import { Button } from "~/ui-kit/Button/Button";
 
 import type { NoSignalProps } from "./logic/usePresenter";
 import { usePresenter } from "./logic/usePresenter";
